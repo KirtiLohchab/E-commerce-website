@@ -1,21 +1,19 @@
 import mongoose, { Document } from "mongoose";
 import { myCache } from "../app.js";
-import { InvalidateCacheProps, OrderItemType } from "../types/types.js";
 import { Product } from "../models/products.js";
-import { Order } from "../models/order.js";
+import { InvalidateCacheProps, OrderItemType } from "../types/types.js";
 
 export const connectDB = (uri: string) => {
   mongoose
     .connect(uri, {
-      dbName: "E-Commerce_2024",
+      dbName: "Ecommerce_24",
       family: 4,
     })
-    .then((c) => console.log(`DB connected to ${c.connection.host}`))
+    .then((c) => console.log(`DB Connected to ${c.connection.host}`))
     .catch((e) => console.log(e));
 };
-// mongodb://localhost:27017
 
-export const invalidateCache = async ({
+export const invalidateCache = ({
   product,
   order,
   admin,
@@ -30,15 +28,11 @@ export const invalidateCache = async ({
       "all-products",
     ];
 
-    const products = await Product.find({}).select("_id");
-
-    products.forEach((i) => {
-      productKeys.push(`product-${i._id}`);
-    });
     if (typeof productId === "string") productKeys.push(`product-${productId}`);
 
     if (typeof productId === "object")
       productId.forEach((i) => productKeys.push(`product-${i}`));
+
     myCache.del(productKeys);
   }
   if (order) {
@@ -47,10 +41,8 @@ export const invalidateCache = async ({
       `my-orders-${userId}`,
       `order-${orderId}`,
     ];
-    const orders = await Order.find({}).select("_id");
-    orders.forEach((i) => {
-      ordersKeys.push(`product-${i._id}`);
-    });
+
+    myCache.del(ordersKeys);
   }
   if (admin) {
     myCache.del([

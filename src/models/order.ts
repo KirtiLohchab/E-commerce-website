@@ -3,12 +3,26 @@ import mongoose from "mongoose";
 const schema = new mongoose.Schema(
   {
     shippingInfo: {
-      address: { type: String, required: true },
-
-      city: { type: String, required: true },
-      state: { type: String, required: true },
-      country: { type: String, required: true },
-      pinCode: { type: Number, required: true },
+      address: {
+        type: String,
+        required: true,
+      },
+      city: {
+        type: String,
+        required: true,
+      },
+      state: {
+        type: String,
+        required: true,
+      },
+      country: {
+        type: String,
+        required: true,
+      },
+      pinCode: {
+        type: Number,
+        required: true,
+      },
     },
 
     user: {
@@ -56,7 +70,6 @@ const schema = new mongoose.Schema(
       },
     ],
   },
-
   {
     timestamps: true,
   }

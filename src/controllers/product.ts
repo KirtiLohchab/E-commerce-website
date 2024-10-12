@@ -13,7 +13,7 @@ import { invalidateCache } from "../utils/features.js";
 // import { faker } from "@faker-js/faker";
 
 // Revalidate on New,Update,Delete Product & on New Order
-export const getLatestProducts = TryCatch(async (req, res, next) => {
+export const getlatestProducts = TryCatch(async (req, res, next) => {
   let products;
 
   if (myCache.has("latest-products"))
@@ -47,7 +47,7 @@ export const getAllCategories = TryCatch(async (req, res, next) => {
 });
 
 // Revalidate on New,Update,Delete Product & on New Order
-export const getAdminProduct = TryCatch(async (req, res, next) => {
+export const getAdminProducts = TryCatch(async (req, res, next) => {
   let products;
   if (myCache.has("all-products"))
     products = JSON.parse(myCache.get("all-products") as string);
